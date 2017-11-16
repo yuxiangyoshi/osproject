@@ -9,5 +9,8 @@ client: client.o
 threads: clientThreads.o
 	g++ client.o -o clientThreads
 
+processes: clientProcesses.o
+	g++ client.o -o clientProcesses
+
 clean: 
 	rm -rf *.o server client
