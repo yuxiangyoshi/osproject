@@ -71,17 +71,6 @@ void Commons::requestNumFromServer(int server_socket, char *request)
 
 void Commons::readNumFromServer(int server_socket, int *response)
 {
-/*
-    char buf[BUFSIZE];
-    int n;
-    mode_t mode = 0666;
-    int ofd = open(file, O_WRONLY | O_CREAT, mode);
-    if (ofd == -1)
-        perror("open()");
-    while ((n = read(server_socket, buf, BUFSIZE)) > 0)
-        write(ofd, buf, n);
-    close(ofd);
-*/
     char buf[BUFSIZE];
     int n;
   
