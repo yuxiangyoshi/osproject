@@ -1,4 +1,4 @@
-all: server client threads
+all: server client
 
 server: server.o
 	gcc server.o -o server
@@ -7,10 +7,10 @@ client: client.o
 	gcc client.o -o client
 
 threads: clientThreads.o
-	g++ client.o -o clientThreads
+	g++ -pthread clientThreads.o -o clientThreads
 
 processes: clientProcesses.o
-	g++ client.o -o clientProcesses
+	g++ clientProcesses.o -o clientProcesses
 
 clean: 
-	rm -rf *.o server client
+	rm -rf *.o server client threads processes

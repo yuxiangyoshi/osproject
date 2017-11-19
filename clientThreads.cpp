@@ -12,39 +12,41 @@
 #include <string.h>
 #include "Timer.h"
 #include "Commons.h"
+
 using namespace std;
 
-#define N_THREADS 10
+#define N_THREADS 1
 
 struct Thread_data
 {
-    int id;
-    pthread_t thread_id;
-    char * host;
-    u_short port;
+  int id;
+  pthread_t thread_id;
+  char * host;
+  u_short port;
 };
 
 void *thread_work(void *arg)
 {
-    Thread_data data = *(Thread_data*)arg;
-    Commons c;
-    c.task(data.host, data.port);
-    pthread_exit(0);
+  Commons c;
+  Thread_data data = *(Thread_data*)arg;
+
+  c.task(data.host, data.port);
+  pthread_exit(0);
 }
 
 int main(int argc, char *argv[])
 {
-    if (argc != 3)
-    {
-        cerr << "Usage: " << argv[0] << " host port\n";
-        exit(-1);
-    }
-   
-    char *host = argv[1];
-    u_short port = atoi(argv[2]);
-    Commons c;
-    int count = c.COUNT;
-    Thread_data thread_args[count];
+  if (argc != 3)
+  {
+    cerr << "Usage: " << argv[0] << " host port\n";
+    exit(-1);
+  }
+
+  Commons c;
+  int count = N_THREADS;
+  Thread_data thread_args[count];
+  char *host = argv[1];
+  u_short port = atoi(argv[2]);
 
 	//Start Timer
 	Timer time;
@@ -52,23 +54,22 @@ int main(int argc, char *argv[])
 	time.start();
 
 	//Create Thread and do process
-    for (int i = 0; i < count; ++i)
-    {
-
-        Thread_data & t = thread_args[i];
-        t.id = i;
-        t.host = host;
-        t.port = port;
-        pthread_create(&t.thread_id, NULL, thread_work, &t);
-    }
+  for (int i = 0; i < count; ++i)
+  {
+    Thread_data & t = thread_args[i];
+    t.id = i;
+    t.host = host;
+    t.port = port;
+    pthread_create(&t.thread_id, NULL, thread_work, &t);
+  }
     
 	//Wait for each thread to finish
-    for (int i=0; i < count; i++)
-        pthread_join(thread_args[i].thread_id, NULL);
+  for (int i=0; i < count; i++)
+      pthread_join(thread_args[i].thread_id, NULL);
 
 	//Stop timer and output elapsed time
 	time.elapsedUserTime(eTime);
 	cout << "Elapsed User Time: " << eTime << endl;
 
-    pthread_exit(0);
+  pthread_exit(0);
 }
