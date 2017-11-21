@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define N_THREADS 1
+#define N_THREADS 1000
 
 struct Thread_data
 {
@@ -36,8 +36,7 @@ void *thread_work(void *arg)
 
 int main(int argc, char *argv[])
 {
-  if (argc != 3)
-  {
+  if (argc != 3) {
     cerr << "Usage: " << argv[0] << " host port\n";
     exit(-1);
   }
@@ -54,8 +53,7 @@ int main(int argc, char *argv[])
 	time.start();
 
 	//Create Thread and do process
-  for (int i = 0; i < count; ++i)
-  {
+  for (int i = 0; i < count; ++i) {
     Thread_data & t = thread_args[i];
     t.id = i;
     t.host = host;

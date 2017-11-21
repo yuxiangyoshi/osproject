@@ -4,6 +4,8 @@
 using namespace std;
 
 int main () {
+  char serverAddress[] = "localhost";
+
   Commons c;
   pid_t pid;
   int i;
@@ -14,14 +16,14 @@ int main () {
 
   cout << "START: Parent process PID = " << getpid() << endl;
 
-  for (i = 1; i <= c.COUNT; i++)
+  for (i = 1; i <= COUNT; i++)
     switch ( pid = fork() ) {
       case -1:
         cout << "Error in fork";
 
       case 0:
         cout << "Child " <<i <<" PID = " << getpid() << endl;
-        c.task("localhost", 8888);
+        c.task(serverAddress, 8888);
         time.elapsedUserTime(eTime);
         cout << "Child " <<i <<" Elapsed User Time: " << eTime << endl;
         return 0;

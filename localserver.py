@@ -7,10 +7,17 @@ listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 listen_socket.bind((HOST, PORT))
 listen_socket.listen(5)
 print ('Serving HTTP on port %s ...' % PORT)
-a = [randint(0,50) for x in range(11)]
-b = [randint(100,500) for x in range(11)]
-c = [randint(1000,5000) for x in range(11)]
+
+a = [randint(0,50) for x in range(10)]
+b = [randint(100,500) for x in range(10)]
+c = [randint(1000,5000) for x in range(10)]
+
+print "Array a:"
 print(a)
+print "Array b:"
+print(b)
+print "Array c:"
+print(c)
 
 i = 0  # counter for selecting a
 j = 0

@@ -10,6 +10,10 @@
 
 using namespace std;
 
+static const int COUNT = 10;
+static const int BUFSIZE = 56;
+static const char alphaReq[] = "abc";
+
 class Commons
 {
     public:
@@ -19,8 +23,7 @@ class Commons
         void readNumFromServer(int server_socket, int *response);
         void task(char * host, u_short port);
         void executeSummation(char * host, u_short port);
-        int COUNT = 10;
-        int BUFSIZE = 56;
+
     private:
        void error(char *msg);     
 };    
@@ -36,11 +39,13 @@ sockaddr_in Commons::make_server_addr(char * host, u_short port)
     sockaddr_in addr;
     bzero(&addr, sizeof addr);
     hostent *hp = gethostbyname(host);
+
     if (hp == 0)
     {
         herror(host);
         exit(-1);
     }
+
     addr.sin_family = AF_INET;
     bcopy(hp->h_addr, &addr.sin_addr, hp->h_length);
     addr.sin_port = htons(port);
@@ -51,13 +56,22 @@ int Commons::connect_socket(char * host, u_short port)
 {
     int status;
     int tries = 3;
+
     sockaddr_in addr = make_server_addr(host, port);
     int s = socket(AF_INET, SOCK_STREAM, 0);
-    if (s == -1)
-        error("socket()");
+
+    if (s == -1) {
+        char errMsg[] = "connect refused";
+        error(errMsg);
+    }
+
     status = connect(s, (sockaddr*)&addr, sizeof addr);
-    if (status < 0)
-        error("connect refused");
+
+    if (status < 0) {
+        char errMsg[] = "connect refused";
+        error(errMsg);
+    }
+
     return s;
 }
 
@@ -65,8 +79,11 @@ void Commons::requestNumFromServer(int server_socket, char *request)
 {
     int len = 1;
     int n = write(server_socket, request, len);
-    if (n != len)
-        error("short write");
+
+    if (n != len) {
+        char errMsg[] = "short write";
+        error(errMsg);
+    }
 }
 
 void Commons::readNumFromServer(int server_socket, int *response)
@@ -81,16 +98,26 @@ void Commons::readNumFromServer(int server_socket, int *response)
 void Commons::executeSummation(char * host, u_short port)
 {
     int server_socket;
-    char request = 'a';
+    char request;
     int response;
+
+    srand( time(NULL) );
+    int randReq = rand() % 3;
+    int randIdx = rand() % 10;
+    request = alphaReq[randReq];
 
     server_socket = connect_socket(host, port);
 
-    for (int i=0; i<COUNT; i++) {
+    for (int j=0; j<=randIdx; j++) {
       requestNumFromServer(server_socket, &request);
       readNumFromServer(server_socket, &response);
 
-      cout << "Request: " << i << ", Response: " << response << endl;
+      int sum = 0;
+      for (int i=1; i<=response; i++) {
+        sum += i;
+      }
+
+      printf("%c, %d\n", request, sum);
     }
 
     close(server_socket);
