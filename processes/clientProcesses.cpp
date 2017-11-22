@@ -25,12 +25,10 @@ int main () {
         cout << "Child " <<i <<" PID = " << getpid() << endl;
         c.task(serverAddress, 8888);
         time.elapsedUserTime(eTime);
-        cout << "Child " <<i <<" Elapsed User Time: " << eTime << endl;
         return 0;
 
       default:
-        cout << "Parent Process Elapsed User Time: " << eTime << endl;
+        continue;
     }  
-
-  return 0;
+    cout << "Total Elapsed User Time: " << eTime << endl;
 }

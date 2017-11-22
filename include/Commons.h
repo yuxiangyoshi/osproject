@@ -10,7 +10,7 @@
 
 using namespace std;
 
-static const int COUNT = 10;
+static const int COUNT = 100;
 static const int BUFSIZE = 56;
 static const char alphaReq[] = "abc";
 

@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define N_THREADS 2000
+#define N_THREADS 1000
 
 struct Thread_data
 {
