@@ -24,32 +24,35 @@ j = 0
 k = 0
 while True:
     client_connection, client_address = listen_socket.accept()
+    if (i > 10):
+      i = 0
+    if (j > 10):
+      j = 0
+    if (k > 10):
+      k = 0
     
     while True:
-        request = client_connection.recv(1024).decode()
-        print(request)
-        if request == "a":
-            print(i)
-            astr = a[i]
-            http_response = str(astr)
-            client_connection.sendall(http_response.encode())
-            i += 1
-        elif request == "b":
-            print(j)
-            bstr = b[j]
-            http_response = str(bstr)
-            client_connection.sendall(http_response.encode())
-            j += 1
-        elif request == "c":
-            print(k)
-            cstr = c[k]
-            http_response = str(cstr)
-            client_connection.sendall(http_response.encode())
-            k += 1
-        else:
-            # client_connection.sendall("Q".encode())
-            client_connection.close()
-            i = 0
-            j = 0
-            k = 0
-            break
+      request = client_connection.recv(1024).decode()
+      print(request)
+      if request == "a":
+        print(i)
+        astr = a[i%10]
+        http_response = str(astr)
+        client_connection.sendall(http_response.encode())
+        i += 1
+      elif request == "b":
+        print(j)
+        bstr = b[j%10]
+        http_response = str(bstr)
+        client_connection.sendall(http_response.encode())
+        j += 1
+      elif request == "c":
+        print(k)
+        cstr = c[k%10]
+        http_response = str(cstr)
+        client_connection.sendall(http_response.encode())
+        k += 1
+      else:
+        # client_connection.sendall("Q".encode())
+        client_connection.close()
+        break

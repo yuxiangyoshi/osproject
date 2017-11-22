@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define N_THREADS 1000
+#define N_THREADS 2000
 
 struct Thread_data
 {
@@ -62,8 +62,10 @@ int main(int argc, char *argv[])
   }
     
 	//Wait for each thread to finish
-  for (int i=0; i < count; i++)
-      pthread_join(thread_args[i].thread_id, NULL);
+  for (int i=0; i < count; i++) {
+    pthread_join(thread_args[i].thread_id, NULL);
+    cout << "Complete thread: " << i << endl;
+  }
 
 	//Stop timer and output elapsed time
 	time.elapsedUserTime(eTime);

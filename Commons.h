@@ -103,22 +103,18 @@ void Commons::executeSummation(char * host, u_short port)
 
     srand( time(NULL) );
     int randReq = rand() % 3;
-    int randIdx = rand() % 10;
     request = alphaReq[randReq];
 
     server_socket = connect_socket(host, port);
+    requestNumFromServer(server_socket, &request);
+    readNumFromServer(server_socket, &response);
 
-    for (int j=0; j<=randIdx; j++) {
-      requestNumFromServer(server_socket, &request);
-      readNumFromServer(server_socket, &response);
-
-      int sum = 0;
-      for (int i=1; i<=response; i++) {
-        sum += i;
-      }
-
-      printf("%c, %d\n", request, sum);
+    int sum = 0;
+    for (int i=1; i<=response; i++) {
+      sum += i;
     }
+
+    printf("%c, %d\n", request, sum);
 
     close(server_socket);
 }
