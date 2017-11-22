@@ -10,8 +10,8 @@
 #include <pthread.h>
 #include <iostream>
 #include <string.h>
-#include "Timer.h"
-#include "Commons.h"
+#include "../include/Timer.h"
+#include "../include/Commons.h"
 
 using namespace std;
 

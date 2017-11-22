@@ -1,10 +1,10 @@
 all: threads processes
 
-threads: clientThreads.o
-	g++ -pthread clientThreads.o -o clientThreads
+threads: threads/clientThreads.o
+	g++ -pthread threads/clientThreads.o -o threads/clientThreads
 
-processes: clientProcesses.o
-	g++ clientProcesses.o -o clientProcesses
+processes: processes/clientProcesses.o
+	g++ processes/clientProcesses.o -o processes/clientProcesses
 
 clean: 
-	rm -rf *.o threads processes
+	rm threads/*.o threads/clientThreads processes/*.o processes/clientProcesses
