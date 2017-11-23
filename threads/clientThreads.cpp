@@ -36,13 +36,13 @@ void *thread_work(void *arg)
 
 int main(int argc, char *argv[])
 {
-  if (argc != 3) {
+  if (argc != 4) {
     cerr << "Usage: " << argv[0] << " host port\n";
     exit(-1);
   }
 
   Commons c;
-  int count = N_THREADS;
+  int count = atoi(argv[3]);
   Thread_data thread_args[count];
   char *host = argv[1];
   u_short port = atoi(argv[2]);

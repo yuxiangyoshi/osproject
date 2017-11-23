@@ -114,7 +114,7 @@ void Commons::executeSummation(char * host, u_short port)
       sum += i;
     }
 
-    printf("%c, %d\n", request, sum);
+    // printf("%c, %d\n", request, sum);
 
     close(server_socket);
 }
