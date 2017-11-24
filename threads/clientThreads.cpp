@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define N_THREADS 2000
+#define N_THREADS 1000
 
 struct Thread_data
 {
@@ -36,13 +36,13 @@ void *thread_work(void *arg)
 
 int main(int argc, char *argv[])
 {
-  if (argc != 3) {
-    cerr << "Usage: " << argv[0] << " host port\n";
+  if (argc != 4) {
+    cerr << "Usage: " << argv[0] << " host port count\n";
     exit(-1);
   }
 
   Commons c;
-  int count = N_THREADS;
+  int count = atoi(argv[3]);
   Thread_data thread_args[count];
   char *host = argv[1];
   u_short port = atoi(argv[2]);

@@ -1,36 +1,47 @@
-#include "../include/Timer.h"
+//#include "../include/Timer.h"
 #include "../include/Commons.h"
-
+#include <sys/wait.h>
 using namespace std;
 
-int main () {
-  char serverAddress[] = "localhost";
+int main (int argc, char *argv[]) {
+  if (argc != 4) {
+    cerr << "Usage: " << argv[0] << " host port count\n";
+    exit(-1);
+  }
 
   Commons c;
+  int count = atoi(argv[3]);
   pid_t pid;
   int i;
-
-  Timer time;
+  char *host = argv[1];
+  u_short port = atoi(argv[2]);
+  //Timer time;
   double eTime;
-  time.start();   
+  //time.start();   
+  const clock_t begin_time = clock();
 
   cout << "START: Parent process PID = " << getpid() << endl;
 
-  for (i = 1; i <= COUNT; i++)
+  for (i = 1; i <= count; i++)
     switch ( pid = fork() ) {
       case -1:
         cout << "Error in fork";
 
       case 0:
         cout << "Child " <<i <<" PID = " << getpid() << endl;
-        c.task(serverAddress, 8888);
-        time.elapsedUserTime(eTime);
-        cout << "Child " <<i <<" Elapsed User Time: " << eTime << endl;
+        c.task(host, port);
+        cout << "Elapsed User Time in seconds for PID "<< getpid() << "=" <<float( clock () - begin_time )/CLOCKS_PER_SEC << endl;
         return 0;
 
       default:
-        cout << "Parent Process Elapsed User Time: " << eTime << endl;
-    }  
-
-  return 0;
+        continue;
+      }
+      cout << "Waiting" << endl;
+      // Need to wait for all
+      for(i=0; i<count; i++){
+        wait(0);
+        cout << "Got " << i+1 << " done" << endl;
+      }
+      cout << "Total Elapsed User Time in seconds: " << float( clock () - begin_time )/CLOCKS_PER_SEC << endl;
+      return 0;   
 }
