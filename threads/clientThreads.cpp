@@ -23,6 +23,7 @@ struct Thread_data
   pthread_t thread_id;
   char * host;
   u_short port;
+  char * reqtype;
 };
 
 void *thread_work(void *arg)
@@ -30,13 +31,13 @@ void *thread_work(void *arg)
   Commons c;
   Thread_data data = *(Thread_data*)arg;
 
-  c.task(data.host, data.port);
+  c.task(data.host, data.port, data.reqtype);
   pthread_exit(0);
 }
 
 int main(int argc, char *argv[])
 {
-  if (argc != 4) {
+  if (argc != 5) {
     cerr << "Usage: " << argv[0] << " host port count\n";
     exit(-1);
   }
@@ -46,6 +47,7 @@ int main(int argc, char *argv[])
   Thread_data thread_args[count];
   char *host = argv[1];
   u_short port = atoi(argv[2]);
+  char *reqtype = argv[4];
 
 	//Start Timer
 	Timer time;
@@ -58,6 +60,7 @@ int main(int argc, char *argv[])
     t.id = i;
     t.host = host;
     t.port = port;
+    t.reqtype = reqtype;
     pthread_create(&t.thread_id, NULL, thread_work, &t);
   }
     

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <netdb.h>
 #include <fcntl.h>
@@ -12,7 +13,7 @@ using namespace std;
 
 static const int COUNT = 100;
 static const int BUFSIZE = 56;
-static const char alphaReq[] = "abc";
+static const char *typeRequest[] = {"cpu", "balanced", "io", "end"};
 
 class Commons
 {
@@ -21,8 +22,8 @@ class Commons
         int connect_socket(char *host, u_short port);
         void requestNumFromServer(int server_socket, char *request);
         void readNumFromServer(int server_socket, int *response);
-        void task(char * host, u_short port);
-        void executeSummation(char * host, u_short port);
+        void task(char * host, u_short port, char * reqType);
+        void executeSummation(char * host, u_short port, char * reqType);
 
     private:
        void error(char *msg);     
@@ -77,7 +78,7 @@ int Commons::connect_socket(char * host, u_short port)
 
 void Commons::requestNumFromServer(int server_socket, char *request)
 {
-    int len = 1;
+    int len = strlen(request);
     int n = write(server_socket, request, len);
 
     if (n != len) {
@@ -95,18 +96,28 @@ void Commons::readNumFromServer(int server_socket, int *response)
     *response = atoi(buf);
 }
 
-void Commons::executeSummation(char * host, u_short port)
+void Commons::executeSummation(char * host, u_short port, char * reqType)
 {
     int server_socket;
-    char request;
+    char *request;
     int response;
 
     srand( time(NULL) );
-    int randReq = rand() % 3;
-    request = alphaReq[randReq];
+
+    if (strcmp(reqType, typeRequest[0]) == 0)  
+      request = (char *) typeRequest[0];
+    else if (strcmp(reqType, typeRequest[1]) == 0)  
+      request = (char *) typeRequest[1];
+    else if (strcmp(reqType, typeRequest[2]) == 0)  
+      request = (char *) typeRequest[2];
+    else {
+        char errMsg[] = "invalid request";
+        error(errMsg);
+        return;
+    }
 
     server_socket = connect_socket(host, port);
-    requestNumFromServer(server_socket, &request);
+    requestNumFromServer(server_socket, request);
     readNumFromServer(server_socket, &response);
 
     int sum = 0;
@@ -114,12 +125,14 @@ void Commons::executeSummation(char * host, u_short port)
       sum += i;
     }
 
-    // printf("%c, %d\n", request, sum);
+    printf("%s, %d\n", request, sum);
 
+    request = (char *) typeRequest[3];
+    requestNumFromServer(server_socket, request);
     close(server_socket);
 }
 
-void Commons::task(char * host, u_short port)
+void Commons::task(char * host, u_short port, char * reqType)
 {
-    executeSummation(host, port);
+    executeSummation(host, port, reqType);
 }

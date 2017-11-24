@@ -17,13 +17,11 @@ def testconnect():
         print(data)
 
     for j in range(10):
-        # client_socket.connect(('localhost', 8888))
         client_socket.send("balanced".encode())
         data = client_socket.recv(1024).decode()
         print(data)
 
     for k in range(10):
-        # client_socket.connect(('localhost', 8888))
         client_socket.send("io".encode())
         data = client_socket.recv(1024).decode()
         print(data)

@@ -2,6 +2,7 @@ import socket
 import time
 import _thread
 from random import randint
+
 HOST, PORT = '', 8888
 
 def handle(client_connection):
@@ -22,11 +23,10 @@ def handle(client_connection):
             break
         else:
             print("bad request")
+
         time.sleep(float(latency)/1000)
         http_response = str(num)
         client_connection.sendall(http_response.encode())
-        # client_connection.sendall("Q".encode())
-        # client_connection.close()
 
             
 listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
