@@ -39,8 +39,7 @@ int main (int argc, char *argv[]) {
       cout << "Waiting" << endl;
       // Need to wait for all
       for(i=0; i<count; i++){
-        wait(0); 
-        //https://stackoverflow.com/questions/26497315/c-meaning-of-waitnull-when-executing-fork-in-parallel
+        wait(0);
         cout << "Got " << i+1 << " done" << endl;
       }
       cout << "Total Elapsed User Time in seconds: " << float( clock () - begin_time )/CLOCKS_PER_SEC << endl;
