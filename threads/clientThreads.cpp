@@ -50,9 +50,7 @@ int main(int argc, char *argv[])
   char *reqtype = argv[4];
 
 	//Start Timer
-	Timer time;
-	double eTime;
-	time.start();
+  const clock_t begin_time = clock();
 
 	//Create Thread and do process
   for (int i = 0; i < count; ++i) {
@@ -71,8 +69,7 @@ int main(int argc, char *argv[])
   }
 
 	//Stop timer and output elapsed time
-	time.elapsedUserTime(eTime);
-	cout << "Elapsed User Time: " << eTime << endl;
+  cout << "Total Elapsed User Time in seconds: " << float(clock() - begin_time) / CLOCKS_PER_SEC << endl;
 
   pthread_exit(0);
 }
