@@ -125,8 +125,6 @@ void Commons::executeSummation(char * host, u_short port, char * reqType)
       sum += i;
     }
 
-    printf("%s, %ld\n", request, sum);
-
     request = (char *) typeRequest[3];
     requestNumFromServer(server_socket, request);
     close(server_socket);

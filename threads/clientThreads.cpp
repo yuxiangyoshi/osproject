@@ -49,10 +49,10 @@ int main(int argc, char *argv[])
   u_short port = atoi(argv[2]);
   char *reqtype = argv[4];
 
-	//Start Timer
+	// Start Timer
   const clock_t begin_time = clock();
 
-	//Create Thread and do process
+	// Create Thread and do process
   for (int i = 0; i < count; ++i) {
     Thread_data & t = thread_args[i];
     t.id = i;
@@ -62,14 +62,14 @@ int main(int argc, char *argv[])
     pthread_create(&t.thread_id, NULL, thread_work, &t);
   }
     
-	//Wait for each thread to finish
+	// Wait for each thread to finish
   for (int i=0; i < count; i++) {
     pthread_join(thread_args[i].thread_id, NULL);
-    cout << "Complete thread: " << i << endl;
+    // cout << "Complete thread: " << i << endl;
   }
 
-	//Stop timer and output elapsed time
-  cout << "Total Elapsed User Time in seconds: " << float(clock() - begin_time) / CLOCKS_PER_SEC << endl;
+	// Stop timer and output elapsed time
+  // cout << "Total Elapsed User Time in seconds: " << float(clock() - begin_time) / CLOCKS_PER_SEC << endl;
 
   pthread_exit(0);
 }
