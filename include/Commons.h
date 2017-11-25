@@ -135,6 +135,6 @@ void Commons::executeSummation(char * host, u_short port, char * reqType, int re
 
 void Commons::task(char * host, u_short port, char * reqType, int count)
 {
-    int reqNum = 8096 / count;
+    int reqNum = 8192 / count;
     executeSummation(host, port, reqType, reqNum);
 }
