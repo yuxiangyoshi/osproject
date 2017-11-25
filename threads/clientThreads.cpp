@@ -24,6 +24,7 @@ struct Thread_data
   char * host;
   u_short port;
   char * reqtype;
+  int count;
 };
 
 void *thread_work(void *arg)
@@ -31,7 +32,7 @@ void *thread_work(void *arg)
   Commons c;
   Thread_data data = *(Thread_data*)arg;
 
-  c.task(data.host, data.port, data.reqtype);
+  c.task(data.host, data.port, data.reqtype, data.count);
   pthread_exit(0);
 }
 
@@ -59,6 +60,7 @@ int main(int argc, char *argv[])
     t.host = host;
     t.port = port;
     t.reqtype = reqtype;
+    t.count = count; 
     pthread_create(&t.thread_id, NULL, thread_work, &t);
   }
     

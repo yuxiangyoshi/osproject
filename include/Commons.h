@@ -22,8 +22,8 @@ class Commons
         int connect_socket(char *host, u_short port);
         void requestNumFromServer(int server_socket, char *request);
         void readNumFromServer(int server_socket, int *response);
-        void task(char * host, u_short port, char * reqType);
-        void executeSummation(char * host, u_short port, char * reqType);
+        void task(char * host, u_short port, char * reqType, int count);
+        void executeSummation(char * host, u_short port, char * reqType, int reqNum);
 
     private:
        void error(char *msg);     
@@ -96,7 +96,7 @@ void Commons::readNumFromServer(int server_socket, int *response)
     *response = atoi(buf);
 }
 
-void Commons::executeSummation(char * host, u_short port, char * reqType)
+void Commons::executeSummation(char * host, u_short port, char * reqType, int reqNum)
 {
     int server_socket;
     char *request;
@@ -117,12 +117,15 @@ void Commons::executeSummation(char * host, u_short port, char * reqType)
     }
 
     server_socket = connect_socket(host, port);
-    requestNumFromServer(server_socket, request);
-    readNumFromServer(server_socket, &response);
 
-    long sum = 0;
-    for (int i=1; i<=response; i++) {
-      sum += i;
+    for (int j=0; j<reqNum; j++) {
+      requestNumFromServer(server_socket, request);
+      readNumFromServer(server_socket, &response);
+
+      long sum = 0;
+      for (int i=1; i<=response; i++) {
+        sum += (response - i) / 3;
+      }
     }
 
     request = (char *) typeRequest[3];
@@ -130,7 +133,8 @@ void Commons::executeSummation(char * host, u_short port, char * reqType)
     close(server_socket);
 }
 
-void Commons::task(char * host, u_short port, char * reqType)
+void Commons::task(char * host, u_short port, char * reqType, int count)
 {
-    executeSummation(host, port, reqType);
+    int reqNum = 8096 / count;
+    executeSummation(host, port, reqType, reqNum);
 }

@@ -20,7 +20,7 @@ int main (int argc, char *argv[]) {
   double eTime;
   const clock_t begin_time = clock();
 
-  cout << "START: Parent process PID = " << getpid() << endl;
+  // cout << "START: Parent process PID = " << getpid() << endl;
 
   for (i = 1; i <= count; i++) {
     switch ( pid = fork() ) {
@@ -28,9 +28,9 @@ int main (int argc, char *argv[]) {
         cout << "Error in fork";
 
       case 0:
-        cout << "Child " << i <<" PID = " << getpid() << endl;
-        c.task(host, port, reqtype);
-        cout << "Elapsed User Time in seconds for PID " << getpid() << "=" << float(clock() - begin_time) / CLOCKS_PER_SEC << endl;
+        // cout << "Child " << i <<" PID = " << getpid() << endl;
+        c.task(host, port, reqtype, count);
+        // cout << "Elapsed User Time in seconds for PID " << getpid() << "=" << float(clock() - begin_time) / CLOCKS_PER_SEC << endl;
         return 0;
 
       default:
@@ -38,13 +38,13 @@ int main (int argc, char *argv[]) {
     }
   }
 
-  cout << "Waiting" << endl;
+  // cout << "Waiting" << endl;
   // Need to wait for all
   for(i=0; i<count; i++){
     wait(0);
-    cout << "Got " << i+1 << " done" << endl;
+    // cout << "Got " << i+1 << " done" << endl;
   }
 
-  cout << "Total Elapsed User Time in seconds: " << float(clock() - begin_time) / CLOCKS_PER_SEC << endl;
+  // cout << "Total Elapsed User Time in seconds: " << float(clock() - begin_time) / CLOCKS_PER_SEC << endl;
   return 0;   
 }
