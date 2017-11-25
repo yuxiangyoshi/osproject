@@ -29,9 +29,14 @@ for (int i = 1; i <= amount; ++i) {
 
 ## Process
 
+Compilation:
+```
+make clean; make
+```
+
 Example:
 ```
-terminal@machine:~/osproject/threads$ time ../processes/clientProcesses localhost 8888 100 cpu
+terminal@machine:~/osproject$ time ./processes/clientProcesses localhost 8888 100 cpu
 ```
 Second to last argument is number of processes.
 
@@ -41,7 +46,7 @@ Last argument is request type {cpu, balanced, io}.
 
 Example:
 ```
-terminal@machine:~/osproject/threads$ time ../threads/clientThreads localhost 8888 100 cpu
+terminal@machine:~/osproject$ time ./threads/clientThreads localhost 8888 100 cpu
 ```
 Second to last argument is number of threads.
 
