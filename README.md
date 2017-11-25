@@ -27,6 +27,24 @@ for (int i = 1; i <= amount; ++i) {
 }
 ```
 
+## Process
+
+Example:
+```
+terminal@machine:~/osproject/threads$ time ../processes/clientProcesses localhost 8888 100 cpu
+```
+Second to last argument is number of processes.
+Last argument is request type {cpu, balanced, io}.
+
+## Threads
+
+Example:
+```
+terminal@machine:~/osproject/threads$ time ../threads/clientThreads localhost 8888 100 cpu
+```
+Second to last argument is number of threads.
+Last argument is request type {cpu, balanced, io}.
+
 ## Coroutine
 
 Measure the time cost of the program under various setting:
