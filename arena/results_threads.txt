@@ -1,0 +1,87 @@
+./run.sh
++ EXE=threads
++ TYPE=cpu
++ ./threads localhost 8888 1 cpu
+
+real	0m33.644s
+user	0m33.284s
+sys	0m0.016s
++ ./threads localhost 8888 2 cpu
+
+real	0m17.257s
+user	0m34.156s
+sys	0m0.024s
++ ./threads localhost 8888 4 cpu
+
+real	0m8.784s
+user	0m34.736s
+sys	0m0.020s
++ ./threads localhost 8888 8 cpu
+
+real	0m8.182s
+user	1m4.180s
+sys	0m0.012s
++ ./threads localhost 8888 16 cpu
+
+real	0m8.184s
+user	1m4.344s
+sys	0m0.032s
++ echo ''
+
+arena> ./run.sh
++ EXE=threads
++ TYPE=balanced
++ ./threads localhost 8888 1 balanced
+
+real	0m22.556s
+user	0m10.728s
+sys	0m0.068s
++ ./threads localhost 8888 2 balanced
+
+real	0m10.041s
+user	0m8.308s
+sys	0m0.084s
++ ./threads localhost 8888 4 balanced
+
+real	0m4.466s
+user	0m5.960s
+sys	0m0.024s
++ ./threads localhost 8888 8 balanced
+
+real	0m2.046s
+user	0m4.440s
+sys	0m0.012s
++ ./threads localhost 8888 16 balanced
+
+real	0m1.137s
+user	0m5.496s
+sys	0m0.016s
+arena> ./run.sh
++ EXE=threads
++ TYPE=io
++ ./threads localhost 8888 1 io
+
+real	0m46.821s
+user	0m0.048s
+sys	0m0.148s
++ ./threads localhost 8888 2 io
+
+real	0m23.439s
+user	0m0.032s
+sys	0m0.168s
++ ./threads localhost 8888 4 io
+
+real	0m11.732s
+user	0m0.024s
+sys	0m0.172s
++ ./threads localhost 8888 8 io
+
+real	0m5.889s
+user	0m0.052s
+sys	0m0.144s
++ ./threads localhost 8888 16 io
+
+real	0m2.970s
+user	0m0.016s
+sys	0m0.188s
+arena>

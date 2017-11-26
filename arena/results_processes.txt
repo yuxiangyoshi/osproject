@@ -1,0 +1,88 @@
+arena> ./run.sh
++ EXE=progress
++ TYPE=cpu
++ ./processes localhost 8888 1 cpu
+
+real	0m33.651s
+user	0m33.280s
+sys	0m0.024s
++ ./processes localhost 8888 2 cpu
+
+real	0m17.270s
+user	0m34.164s
+sys	0m0.012s
++ ./processes localhost 8888 4 cpu
+
+real	0m8.775s
+user	0m34.720s
+sys	0m0.012s
++ ./processes localhost 8888 8 cpu
+
+real	0m8.175s
+user	1m4.120s
+sys	0m0.020s
++ ./processes localhost 8888 16 cpu
+
+real	0m8.211s
+user	1m4.272s
+sys	0m0.008s
+
+arena> ./run.sh
++ EXE=processes
++ TYPE=balanced
++ ./processes localhost 8888 1 balanced
+
+real	0m22.159s
+user	0m10.276s
+sys	0m0.124s
++ ./processes localhost 8888 2 balanced
+
+real	0m10.563s
+user	0m9.368s
+sys	0m0.060s
++ ./processes localhost 8888 4 balanced
+
+real	0m4.982s
+user	0m7.420s
+sys	0m0.056s
++ ./processes localhost 8888 8 balanced
+
+real	0m2.004s
+user	0m4.264s
+sys	0m0.004s
++ ./processes localhost 8888 16 balanced
+
+real	0m1.071s
+user	0m4.976s
+sys	0m0.004s
++ echo ''
+
+arena> ./run.sh
++ EXE=processes
++ TYPE=io
++ ./processes localhost 8888 1 io
+
+real	0m46.697s
+user	0m0.052s
+sys	0m0.148s
++ ./processes localhost 8888 2 io
+
+real	0m23.386s
+user	0m0.028s
+sys	0m0.172s
++ ./processes localhost 8888 4 io
+
+real	0m11.761s
+user	0m0.052s
+sys	0m0.144s
++ ./processes localhost 8888 8 io
+
+real	0m5.889s
+user	0m0.068s
+sys	0m0.128s
++ ./processes localhost 8888 16 io
+
+real	0m2.958s
+user	0m0.056s
+sys	0m0.136s
+arena>

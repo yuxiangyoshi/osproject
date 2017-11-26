@@ -39,11 +39,10 @@ void *thread_work(void *arg)
 int main(int argc, char *argv[])
 {
   if (argc != 5) {
-    cerr << "Usage: " << argv[0] << " host port count\n";
+    cerr << "Usage: " << argv[0] << " host port count type\n";
     exit(-1);
   }
 
-  Commons c;
   int count = atoi(argv[3]);
   Thread_data thread_args[count];
   char *host = argv[1];
@@ -51,7 +50,7 @@ int main(int argc, char *argv[])
   char *reqtype = argv[4];
 
 	// Start Timer
-  const clock_t begin_time = clock();
+  // const clock_t begin_time = clock();
 
 	// Create Thread and do process
   for (int i = 0; i < count; ++i) {
@@ -60,10 +59,10 @@ int main(int argc, char *argv[])
     t.host = host;
     t.port = port;
     t.reqtype = reqtype;
-    t.count = count; 
+    t.count = count;
     pthread_create(&t.thread_id, NULL, thread_work, &t);
   }
-    
+
 	// Wait for each thread to finish
   for (int i=0; i < count; i++) {
     pthread_join(thread_args[i].thread_id, NULL);

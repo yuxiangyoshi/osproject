@@ -5,7 +5,7 @@ using namespace std;
 
 int main (int argc, char *argv[]) {
   if (argc != 5) {
-    cerr << "Usage: " << argv[0] << " host port count\n";
+    cerr << "Usage: " << argv[0] << " host port count type\n";
     exit(-1);
   }
 
@@ -17,8 +17,7 @@ int main (int argc, char *argv[]) {
   u_short port = atoi(argv[2]);
   char *reqtype = argv[4];
 
-  double eTime;
-  const clock_t begin_time = clock();
+  // const clock_t begin_time = clock();
 
   // cout << "START: Parent process PID = " << getpid() << endl;
 
@@ -46,5 +45,5 @@ int main (int argc, char *argv[]) {
   }
 
   // cout << "Total Elapsed User Time in seconds: " << float(clock() - begin_time) / CLOCKS_PER_SEC << endl;
-  return 0;   
+  return 0;
 }
