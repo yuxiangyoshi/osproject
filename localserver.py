@@ -1,6 +1,6 @@
 import socket
 import time
-import _thread
+import thread
 from random import randint
 
 HOST, PORT = '', 8888
@@ -39,4 +39,4 @@ print ('Serving HTTP on port %s ...' % PORT)
 while True:
     client_connection, client_address = listen_socket.accept()
     #print("before thread")
-    _thread.start_new_thread(handle, (client_connection,))
+    thread.start_new_thread(handle, (client_connection,))
