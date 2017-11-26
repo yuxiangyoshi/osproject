@@ -22,7 +22,8 @@ class Worker {
   void Run(boost::asio::yield_context yield);
 
  private:
-  void DoTask(boost::asio::yield_context yield);
+  void DoTask(boost::asio::ip::tcp::socket& socket,
+              boost::asio::yield_context yield);
 
   std::shared_ptr<boost::asio::io_service> io_service_;
   std::string request_;

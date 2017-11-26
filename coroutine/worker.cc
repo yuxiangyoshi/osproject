@@ -28,17 +28,10 @@ Worker::Worker(std::shared_ptr<boost::asio::io_service> io_service,
 }
 
 void Worker::Run(yield_context yield) {
-  while (progress_->FetchTask()) {
-    DoTask(yield);
-    progress_->ReportTaskDone();
-  }
-}
-
-void Worker::DoTask(yield_context yield) {
   boost::system::error_code ec;
   tcp::socket socket(*io_service_);
 
-  tcp::resolver::query query("localhost", "8000");
+  tcp::resolver::query query("localhost", "8888");
   tcp::resolver resolver(*io_service_);
   auto iterator = resolver.async_resolve(query, yield[ec]);
   assert(!ec);
@@ -46,6 +39,18 @@ void Worker::DoTask(yield_context yield) {
   asio::async_connect(socket, iterator, yield[ec]);
   assert(!ec);
 
+  while (progress_->FetchTask()) {
+    DoTask(socket, yield);
+    progress_->ReportTaskDone();
+  }
+
+  asio::async_write(socket, asio::buffer("end\n"), yield[ec]);
+  assert(!ec);
+  socket.close();
+}
+
+void Worker::DoTask(tcp::socket& socket, yield_context yield) {
+  boost::system::error_code ec;
   asio::async_write(socket, asio::buffer(request_), yield[ec]);
   assert(!ec);
 
@@ -64,7 +69,7 @@ void Worker::DoTask(yield_context yield) {
   }
 
   // Make sure the calculation of `sum` will not be pruned by the compiler.
-  if (sum < 0) {
+  if (sum < -0.1) {
     std::exit(1);
   }
 }

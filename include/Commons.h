@@ -26,8 +26,8 @@ class Commons
         void executeSummation(char * host, u_short port, char * reqType, int reqNum);
 
     private:
-       void error(char *msg);     
-};    
+       void error(char *msg);
+};
 
 void Commons::error(char *msg)
 {
@@ -56,7 +56,6 @@ sockaddr_in Commons::make_server_addr(char * host, u_short port)
 int Commons::connect_socket(char * host, u_short port)
 {
     int status;
-    int tries = 3;
 
     sockaddr_in addr = make_server_addr(host, port);
     int s = socket(AF_INET, SOCK_STREAM, 0);
@@ -90,9 +89,7 @@ void Commons::requestNumFromServer(int server_socket, char *request)
 void Commons::readNumFromServer(int server_socket, int *response)
 {
     char buf[BUFSIZE];
-    int n;
-  
-    n = read(server_socket, buf, BUFSIZE);
+    read(server_socket, buf, BUFSIZE);
     *response = atoi(buf);
 }
 
@@ -104,11 +101,11 @@ void Commons::executeSummation(char * host, u_short port, char * reqType, int re
 
     srand( time(NULL) );
 
-    if (strcmp(reqType, typeRequest[0]) == 0)  
+    if (strcmp(reqType, typeRequest[0]) == 0)
       request = (char *) typeRequest[0];
-    else if (strcmp(reqType, typeRequest[1]) == 0)  
+    else if (strcmp(reqType, typeRequest[1]) == 0)
       request = (char *) typeRequest[1];
-    else if (strcmp(reqType, typeRequest[2]) == 0)  
+    else if (strcmp(reqType, typeRequest[2]) == 0)
       request = (char *) typeRequest[2];
     else {
         char errMsg[] = "invalid request";
@@ -122,9 +119,13 @@ void Commons::executeSummation(char * host, u_short port, char * reqType, int re
       requestNumFromServer(server_socket, request);
       readNumFromServer(server_socket, &response);
 
-      long sum = 0;
+      long long sum = 0;
       for (int i=1; i<=response; i++) {
         sum += (response - i) / 3;
+      }
+
+      if (sum < -0.1) {
+        exit(1);
       }
     }
 
@@ -135,6 +136,6 @@ void Commons::executeSummation(char * host, u_short port, char * reqType, int re
 
 void Commons::task(char * host, u_short port, char * reqType, int count)
 {
-    int reqNum = 8192 / count;
+    int reqNum = 2048 / count;
     executeSummation(host, port, reqType, reqNum);
 }
