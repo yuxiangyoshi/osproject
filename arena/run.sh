@@ -6,10 +6,9 @@ set -o xtrace
 EXE=threads
 #TYPE=cpu
 #TYPE=balanced
-TYPE=io
+#TYPE=io
 
-time ./${EXE} localhost 8888 1 ${TYPE}
-time ./${EXE} localhost 8888 2 ${TYPE}
-time ./${EXE} localhost 8888 4 ${TYPE}
-time ./${EXE} localhost 8888 8 ${TYPE}
-time ./${EXE} localhost 8888 16 ${TYPE}
+for TYPE in balanced io
+do
+	time ./${EXE} localhost 8888 512 ${TYPE}
+done

@@ -1,0 +1,194 @@
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 1 cpu
+
+real	1m26.039s
+user	1m10.750s
+sys	0m0.983s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 2 cpu
+
+real	0m40.722s
+user	1m8.189s
+sys	0m0.821s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 4 cpu
+
+real	0m19.688s
+user	1m6.894s
+sys	0m0.960s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 8 cpu
+
+real	0m13.181s
+user	1m25.552s
+sys	0m1.305s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 16 cpu
+
+real	0m12.474s
+user	1m29.220s
+sys	0m1.236s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 32 cpu
+
+real	0m12.347s
+user	1m28.295s
+sys	0m1.345s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 64 cpu
+
+real	0m12.339s
+user	1m29.185s
+sys	0m1.585s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 128 cpu
+
+real	0m12.331s
+user	1m29.279s
+sys	0m1.747s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 256 cpu
+
+real	0m12.293s
+user	1m29.369s
+sys	0m1.998s
++ for TYPE in cpu balanced io
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 1 balanced
+
+real	1m53.863s
+user	0m18.844s
+sys	0m4.268s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 2 balanced
+
+real	0m55.926s
+user	0m18.336s
+sys	0m3.789s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 4 balanced
+
+real	0m27.134s
+user	0m16.547s
+sys	0m3.077s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 8 balanced
+
+real	0m11.868s
+user	0m7.716s
+sys	0m1.749s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 16 balanced
+
+real	0m5.781s
+user	0m6.980s
+sys	0m1.212s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 32 balanced
+
+real	0m3.428s
+user	0m7.198s
+sys	0m1.287s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 64 balanced
+
+real	0m3.700s
+user	0m7.542s
+sys	0m1.434s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 128 balanced
+
+real	0m3.793s
+user	0m7.552s
+sys	0m1.424s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 256 balanced
+
+real	0m3.731s
+user	0m7.516s
+sys	0m1.513s
++ for TYPE in cpu balanced io
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 1 io
+
+real	5m31.309s
+user	0m0.344s
+sys	0m9.629s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 2 io
+
+real	2m45.038s
+user	0m0.369s
+sys	0m8.930s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 4 io
+
+real	1m21.753s
+user	0m0.373s
+sys	0m7.229s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 8 io
+
+real	0m40.107s
+user	0m0.307s
+sys	0m4.887s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 16 io
+
+real	0m19.726s
+user	0m0.242s
+sys	0m3.262s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 32 io
+
+real	0m9.739s
+user	0m0.150s
+sys	0m2.016s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 64 io
+
+real	0m5.893s
+user	0m0.123s
+sys	0m1.496s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 128 io
+
+real	0m3.933s
+user	0m0.175s
+sys	0m1.658s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./processes localhost 8888 256 io
+
+real	0m4.309s
+user	0m0.255s
+sys	0m1.931s
+sses
+
++ for TYPE in balanced io
++ ./processes localhost 8888 512 balanced
+
+real	0m7.314s
+user	0m8.579s
+sys	0m1.815s
++ for TYPE in balanced io
++ ./processes localhost 8888 512 io
+
+real	0m3.966s
+user	0m0.379s
+sys	0m2.185s
+[yzhang5@linux60811 arena]$ vi run.sh
+[yzhang5@linux60811 arena]$ ./run.sh > new.txt
++ EXE=threads
++ for TYPE in balanced io
++ ./threads localhost 8888 512 balanced
+
+real	0m7.319s
+user	0m8.515s
+sys	0m1.549s
++ for TYPE in balanced io
++ ./threads localhost 8888 512 io
+
+real	0m3.977s
+user	0m0.144s
+sys	0m1.938s
+

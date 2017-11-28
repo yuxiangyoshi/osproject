@@ -1,0 +1,165 @@
+n 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 1 cpu
+
+real	1m20.900s
+user	1m7.260s
+sys	0m0.942s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 2 cpu
+
+real	0m38.506s
+user	1m4.798s
+sys	0m0.951s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 4 cpu
+
+real	0m20.385s
+user	1m9.097s
+sys	0m1.053s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 8 cpu
+
+real	0m13.719s
+user	1m25.415s
+sys	0m1.374s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 16 cpu
+
+real	0m13.024s
+user	1m27.160s
+sys	0m1.729s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 32 cpu
+
+real	0m12.524s
+user	1m29.025s
+sys	0m1.200s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 64 cpu
+
+real	0m12.449s
+user	1m28.906s
+sys	0m1.664s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 128 cpu
+
+real	0m12.236s
+user	1m29.398s
+sys	0m1.682s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 256 cpu
+
+real	0m12.214s
+user	1m29.645s
+sys	0m1.649s
++ for TYPE in cpu balanced io
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 1 balanced
+
+real	1m52.522s
+user	0m18.149s
+sys	0m4.102s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 2 balanced
+
+real	0m55.857s
+user	0m18.284s
+sys	0m3.735s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 4 balanced
+
+real	0m26.740s
+user	0m15.813s
+sys	0m2.806s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 8 balanced
+
+real	0m11.872s
+user	0m7.707s
+sys	0m1.664s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 16 balanced
+
+real	0m5.733s
+user	0m6.862s
+sys	0m1.171s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 32 balanced
+
+real	0m3.337s
+user	0m7.245s
+sys	0m1.229s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 64 balanced
+
+real	0m3.508s
+user	0m7.368s
+sys	0m1.259s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 128 balanced
+
+real	0m3.768s
+user	0m7.447s
+sys	0m1.350s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 256 balanced
+
+real	0m3.883s
+user	0m7.583s
+sys	0m1.448s
++ for TYPE in cpu balanced io
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 1 io
+          
+real	5m31.160s
+user	0m0.418s
+sys	0m9.500s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 2 io
+
+real	2m44.804s
+user	0m0.431s
+sys	0m8.699s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 4 io
+
+real	1m21.690s
+user	0m0.351s
+sys	0m7.218s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 8 io
+
+real	0m40.172s
+user	0m0.232s
+sys	0m5.165s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 16 io
+
+real	0m19.690s
+user	0m0.162s
+sys	0m3.197s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 32 io
+
+real	0m9.727s
+user	0m0.111s
+sys	0m1.918s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 64 io
+
+real	0m5.051s
+user	0m0.069s
+sys	0m1.446s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 128 io
+
+real	0m3.923s
+user	0m0.098s
+sys	0m1.505s
++ for NUM in 1 2 4 8 16 32 64 128 256
++ ./threads localhost 8888 256 io
+
+real	0m4.306s
+user	0m0.119s
+sys	0m1.608s
+

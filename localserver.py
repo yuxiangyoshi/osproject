@@ -2,7 +2,7 @@
 
 import socket
 import time
-import _thread
+import thread
 from random import randint, uniform, seed
 
 HOST, PORT = '', 8888
@@ -14,14 +14,14 @@ def handle(client_connection):
         request = client_connection.recv(1024).decode().strip()
         #print("request:", request)
         if request == "cpu":
-            num = randint(19000000, 20000000)
-            latency = uniform(0.0, 0.1)
+            num = 200000
+            latency = uniform(0.00, 0.01)
         elif request == "balanced":
-            num = randint(1900000, 2000000)
-            latency = uniform(5, 6)
+            num = 20000
+            latency = 0.5
         elif request == "io":
-            num = randint(1900, 2000)
-            latency = uniform(20, 25)
+            num = 20
+            latency = 2.5
         elif request.startswith("end"):
             client_connection.close()
             break
@@ -42,4 +42,4 @@ print ('Serving TCP on port %s ...' % PORT)
 while True:
     client_connection, client_address = listen_socket.accept()
     #print("before thread")
-    _thread.start_new_thread(handle, (client_connection,))
+    thread.start_new_thread(handle, (client_connection,))
